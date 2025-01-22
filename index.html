@@ -111,7 +111,7 @@
                         <b>LA-Strecke ${element.tags['ref:La']}</b>
                         ${element.tags.ref ? `<span>Strecke: ${element.tags.ref}</span>` : ''}
                         ${element.tags.name ? `<span>Name: ${element.tags.name}</span>` : ''}
-                        ${element.tags.operator ? `<span>Betreiber: ${element.tags.operator}</span>` : ''}
+                        ${element.tags.operator ? `<span>Betreiber: ${getOperator(element.tags.operator)}</span>` : ''}
 
                         <a href="https://www.openstreetmap.org/way/${element.id}" target="_blank">In OSM anzeigen</a>
                     </div>`;
@@ -127,6 +127,17 @@
                         .addTo(layerLa);
                 });
             });
+    }
+
+    function getOperator(operator) {
+        if (operator === "DB Netz AG"
+            || operator === "DB Netz"
+            || operator === "DB InfraGO"
+            || operator === "DB InfraGO AG"
+        ) {
+            return "DB InfraGO AG";
+        }
+        return operator;
     }
 
     function generateColorFromAttribute(attribute) {
